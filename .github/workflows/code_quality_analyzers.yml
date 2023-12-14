@@ -9,6 +9,8 @@ on:
         required: true
       CODACY_PROJECT_TOKEN:
         required: true
+      DEEPSOURCE_DSN:
+        required: true
 
 jobs:
   sonarcloud:
@@ -42,12 +44,18 @@ jobs:
         with:
           name: coverage.xml
 
+      - name: debug
+        run: |
+          ls
+          pwd
+          cat coverage.xml
+
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  codacy-coverage-reporter:
+  codacy:
     runs-on: ubuntu-latest
     name: Codacy
     steps:
@@ -64,3 +72,22 @@ jobs:
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: coverage.xml
+
+  deepsource:
+    runs-on: ubuntu-latest
+    name: Codacy
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: coverage.xml
+
+      - name: Report test coverage to DeepSource
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: python
+          coverage-file: coverage.xml
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
