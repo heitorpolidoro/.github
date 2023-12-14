@@ -44,12 +44,6 @@ jobs:
         with:
           name: coverage.xml
 
-      - name: debug
-        run: |
-          ls
-          pwd
-          cat coverage.xml
-
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
@@ -75,7 +69,7 @@ jobs:
 
   deepsource:
     runs-on: ubuntu-latest
-    name: Codacy
+    name: Deepsource
     steps:
       - uses: actions/checkout@v4
         with:
