@@ -13,8 +13,40 @@ on:
         required: true
 
 jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r req.txt
+
+      - name: Run tests
+        run: |
+          pytest --cov --cov-branch --cov-report=xml --cov-fail-under=50 --vcr-record=none
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: coverage.xml
+          path: coverage.xml
+
   sonarcloud:
     name: SonarCloud
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +66,7 @@ jobs:
 
   codecov:
     name: CodeCov
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,8 +83,9 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   codacy:
-    runs-on: ubuntu-latest
     name: Codacy
+    needs: tests
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,8 +102,9 @@ jobs:
           coverage-reports: coverage.xml
 
   deepsource:
-    runs-on: ubuntu-latest
     name: Deepsource
+    needs: tests
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
