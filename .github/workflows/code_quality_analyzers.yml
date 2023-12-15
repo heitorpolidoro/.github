@@ -15,7 +15,6 @@ on:
 jobs:
   sonarcloud:
     name: SonarCloud
-    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,7 +34,6 @@ jobs:
 
   codecov:
     name: CodeCov
-    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
