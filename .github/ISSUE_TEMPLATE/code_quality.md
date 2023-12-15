@@ -1,9 +1,9 @@
 ---
 name: Code Quality
-about: Check list for code quality 
+about: Check list for code quality
 title: ''
 labels: ''
-assignees: ''
+assignees: heitorpolidoro
 
 ---
 
@@ -11,8 +11,11 @@ assignees: ''
   - [ ] Issues
   - [ ] Security
   - [ ] Measures
+  - [ ] Duplications
   - [ ] PR
+  - Report Quality: 
 - [ ] Coverage Report
   - [ ] PR
+  - Report Quality: 
 - [ ] PR Comment
-- [ ] Badge
+- [ ] Badge Quality:
