@@ -45,7 +45,7 @@ jobs:
           path: coverage.xml
 
   sonarcloud:
-    name: SonarCloud
+    name: SonarCloud Coverage Submit
     needs: tests
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +64,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deepsource:
-    name: Deepsource
+    name: Deepsource Coverage Submit
     needs: tests
     runs-on: ubuntu-latest
     steps:
