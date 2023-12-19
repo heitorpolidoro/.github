@@ -36,7 +36,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --cov --cov-branch --cov-report=xml --cov-fail-under=50 --vcr-record=none
+          pytest --cov --cov-branch --cov-report=xml --cov-fail-under=100
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
