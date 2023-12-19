@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.fixed.txt ]; then pip install -r requirements.txt; 
+          if [ -f requirements.fixed.txt ]; then pip install -r requirements.fixed.txt; 
           elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run tests
