@@ -101,4 +101,3 @@ jobs:
           path: coverage.xml # <path-to-xml-reports>
           key: ${{ secrets.BUILDPULSE_ACCESS_KEY_ID }}
           secret: ${{ secrets.BUILDPULSE_SECRET_ACCESS_KEY }}
-          coverage-files: coverage.xml # IF PURCHASED

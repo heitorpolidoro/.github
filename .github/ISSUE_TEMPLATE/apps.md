@@ -7,6 +7,5 @@ assignees: ''
 
 ---
 
-- [ ] Autocreate PR
-- [ ] Lint with comments
-- [ ] Releaser
+- [ ] [pull-request-generator]
+- [ ] [self-approver]
