@@ -12,3 +12,4 @@ assignees: ''
 - [ ] [github-app-handler]
 - [ ] [pull-request-generator]
 - [ ] [self-approver]
+- [ ] [auto-release-generator]
