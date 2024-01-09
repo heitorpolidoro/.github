@@ -10,3 +10,4 @@ assignees: ''
 - [ ] [pull-request-generator]
 - [ ] [self-approver]
 - [ ] [auto-release-generator]
+- [ ] [issue-supervisor]
