@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-- [ ] [pull-request-generator]
-- [ ] [self-approver]
-- [ ] [auto-release-generator]
-- [ ] [issue-supervisor]
+- [ ] pull-request-generator
+- [ ] self-approver
+- [ ] auto-release-generator
+- [ ] issue-supervisor

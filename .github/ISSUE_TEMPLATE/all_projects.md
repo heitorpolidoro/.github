@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-- [ ] [template]
-- [ ] [.github]
-- [ ] [github-app-handler]
-- [ ] [pull-request-generator]
-- [ ] [self-approver]
-- [ ] [auto-release-generator]
-- [ ] [issue-supervisor]
+- [ ] template
+- [ ] .github
+- [ ] github-app-handler
+- [ ] pull-request-generator
+- [ ] self-approver
+- [ ] auto-release-generator
+- [ ] issue-supervisor
