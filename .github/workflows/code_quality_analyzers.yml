@@ -7,6 +7,12 @@ on:
         required: true
       DEEPSOURCE_DSN:
         required: true
+    inputs:
+      python_version:
+        type: string
+        description: "Python version to run the tests"
+        default: "3.x"
+        required: true
 
 jobs:
   tests:
@@ -19,10 +25,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      - name: Set up Python ${{ inputs.python_version }}
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: ${{ inputs.python_version }}
           cache: 'pip'
 
       - name: Install dependencies
