@@ -11,7 +11,7 @@ on:
       python_versions:
         type: string
         description: "Python versions to run the tests"
-        default: ["3.x"]
+        default: "3.x"
         required: false
 
 jobs:
