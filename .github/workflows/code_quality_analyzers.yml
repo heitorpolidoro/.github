@@ -65,7 +65,7 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.python_version == set_python_version.outputs.python_version }}
+        if: ${{ matrix.python_version == jobs.set_python_version.outputs.python_version }}
         with:
           name: coverage.xml
           path: coverage.xml
