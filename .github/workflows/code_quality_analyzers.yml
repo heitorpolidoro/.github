@@ -25,10 +25,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python ${{ input.python-version }}
+      - name: Set up Python ${{ inputs.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ input.python-version }}
+          python-version: ${{ inputs.python-version }}
           cache: 'pip'
 
       - name: Install dependencies
