@@ -20,7 +20,8 @@ on:
         required: false
 
 jobs:
-  set_matrix:
+  set_python_version:
+    name: Configuring Python Version
     runs-on: ubuntu-latest
     outputs:
       python_version: ${{ steps.set.outputs.PYTHON_VER }}
@@ -31,11 +32,11 @@ jobs:
 
   tests:
     name: Tests
-    needs: set_matrix
+    needs: set_python_version
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ${{fromJson(needs.set_matrix.outputs.python_version)}}
+        python_version: ${{fromJson(needs.set_python_version.outputs.python_version)}}
 
     steps:
       - name: Checkout
@@ -43,10 +44,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python ${{ inputs.python_version }}
+      - name: Set up Python ${{ matrix.python_version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ inputs.python_version }}
+          python-version: ${{ matrix.python_version }}
           cache: 'pip'
 
       - name: Install dependencies
@@ -69,7 +70,7 @@ jobs:
     name: SonarCloud Coverage Submit
     needs: tests
     runs-on: ubuntu-latest
-    if: (! cancelled()) || inputs.skip_tests
+    #if: (! cancelled()) || inputs.skip_tests
 
     steps:
       - uses: actions/checkout@v4
