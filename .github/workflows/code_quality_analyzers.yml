@@ -20,9 +20,22 @@ on:
         required: false
 
 jobs:
+  set_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      python_version: ${{ steps.set.outputs.PYTHON_VER }}
+    steps:
+      - name: Set Python version
+        id: set
+        run: python -c "print('PYTHON_VER='+str('${{ inputs.python_version }}'.split(',')))" >> $GITHUB_OUTPUT
+
   tests:
     name: Tests
+    needs: set_matrix
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: ${{fromJson(needs.set_matrix.outputs.python_version)}}
 
     steps:
       - name: Checkout
