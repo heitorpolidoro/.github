@@ -7,6 +7,12 @@ on:
         required: true
       DEEPSOURCE_DSN:
         required: true
+    inputs:
+      python_versions:
+        type: string
+        description: "Python versions to run the tests"
+        default: ["3.x"]
+        required: false
 
 jobs:
   tests:
@@ -14,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.x"]
+        python-version: ${{ inputs.python_versions }}
 
 
     steps:
