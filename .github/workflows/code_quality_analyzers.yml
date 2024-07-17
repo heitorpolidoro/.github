@@ -8,9 +8,9 @@ on:
       DEEPSOURCE_DSN:
         required: true
     inputs:
-      python_versions:
+      python_version:
         type: string
-        description: "Python versions to run the tests"
+        description: "Python version to run the tests"
         default: "3.x"
         required: false
 
@@ -18,10 +18,6 @@ jobs:
   tests:
     name: Tests
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        python-version: ${{ inputs.python_versions }}
-
 
     steps:
       - name: Checkout
@@ -29,10 +25,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ input.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ input.python-version }}
           cache: 'pip'
 
       - name: Install dependencies
