@@ -44,8 +44,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coverage.xml
-          path: coverage.xml
+          name: coverage.xml-${{ inputs.python-version }}
+          path: coverage.xml-${{ inputs.python-version }}
 
   sonarcloud:
     name: SonarCloud Coverage Submit
@@ -59,7 +59,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: coverage.xml
+          name: coverage.xml-${{ inputs.python-version }}
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -79,11 +79,11 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: coverage.xml
+          name: coverage.xml-${{ inputs.python-version }}
 
       - name: Report test coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
           key: python
-          coverage-file: coverage.xml
+          coverage-file: coverage.xml-${{ inputs.python-version }}
           dsn: ${{ secrets.DEEPSOURCE_DSN }}
