@@ -9,7 +9,7 @@ on:
         required: true
     inputs:
       python_versions:
-#        type: string
+        type: string
         description: "Python versions to run the tests"
         default: "3.x"
         required: false
