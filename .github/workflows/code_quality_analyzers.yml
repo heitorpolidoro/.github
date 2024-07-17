@@ -12,7 +12,7 @@ on:
         type: string
         description: "Python version to run the tests"
         default: "3.x"
-        required: true
+        required: false
 
 jobs:
   tests:
