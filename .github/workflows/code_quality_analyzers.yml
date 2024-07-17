@@ -13,6 +13,11 @@ on:
         description: "Python version to run the tests"
         default: "3.x"
         required: false
+      skip_tests:
+        type: boolean
+        description: "Skip the Python tests. MUST UPLOAD THE coverage.xml artifact"
+        default: false
+        required: false
 
 jobs:
   tests:
@@ -51,6 +56,7 @@ jobs:
     name: SonarCloud Coverage Submit
     needs: tests
     runs-on: ubuntu-latest
+    if: (! cancelled()) || inputs.skip_tests
 
     steps:
       - uses: actions/checkout@v4
