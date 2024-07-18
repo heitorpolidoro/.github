@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ${{fromJson(set_python_version.outputs.python_version)}}
+        python_version: ${{fromJson(jobs.set_python_version.outputs.python_version)}}
 
     steps:
       - name: Checkout
