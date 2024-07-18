@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ${{fromJson(jobs.set_python_version.outputs.python_version)}}
+        python_version: ${{fromJson(needs.set_python_version.outputs.python_version)}}
 
     steps:
       - name: Checkout
@@ -65,7 +65,7 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.python_version == jobs.set_python_version.outputs.python_version }}
+        if: ${{ matrix.python_version == needs.set_python_version.outputs.python_version }}
         with:
           name: coverage.xml
           path: coverage.xml
