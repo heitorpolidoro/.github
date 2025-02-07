@@ -86,7 +86,7 @@ jobs:
           name: coverage.xml
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@4.2.1
+        uses: SonarSource/sonarqube-scan-action@v4.2.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -106,7 +106,7 @@ jobs:
           name: coverage.xml
 
       - name: Report test coverage to DeepSource
-        uses: deepsourcelabs/test-coverage-action@1.1.2
+        uses: deepsourcelabs/test-coverage-action@v1.1.2
         with:
           key: python
           coverage-file: coverage.xml
