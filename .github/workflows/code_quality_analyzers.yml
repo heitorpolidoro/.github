@@ -63,30 +63,31 @@ jobs:
         run: |
           pytest --cov --cov-branch --cov-report=xml
 
-      - name: Upload artifact
+      - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
         if: ${{ matrix.python_version == needs.set_python_version.outputs.python_coverage_version }}
         with:
           name: coverage.xml
           path: coverage.xml
+          retention-days: 5
 
   sonarcloud:
-    name: SonarCloud Coverage Submit
+    name: SonarCloud
     needs: tests
     runs-on: ubuntu-latest
-    #if: (! cancelled()) || inputs.skip_tests
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
-      - uses: actions/download-artifact@v4.1.7
+      - name: Download Coverage Report
+        uses: actions/download-artifact@v4
         with:
           name: coverage.xml
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.2.1
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
