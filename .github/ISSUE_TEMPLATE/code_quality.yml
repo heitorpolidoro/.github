@@ -1,0 +1,24 @@
+name: Code Quality
+description: Standard check list for code quality
+title: "[Code Quality]: "
+labels: ["quality"]
+assignees: ["heitorpolidoro"]
+body:
+  - type: checkboxes
+    id: quality_checklist
+    attributes:
+      label: Quality Checks
+      options:
+        - label: Code Analysis (Issues, Security, Measures, Duplications)
+        - label: Coverage Report
+        - label: PR Commented
+        - label: Badge Quality Verified
+  - type: input
+    id: report_quality
+    attributes:
+      label: Report Quality Score
+      placeholder: "e.g., A, 100%, etc."
+  - type: textarea
+    id: additional_notes
+    attributes:
+      label: Additional Notes

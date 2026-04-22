@@ -1,0 +1,25 @@
+name: Projects
+description: Tasks to execute across all projects
+title: "[Project Task]: "
+labels: ["task", "global"]
+body:
+  - type: checkboxes
+    id: projects
+    attributes:
+      label: Target Projects
+      description: Select the projects where this task should be applied.
+      options:
+        - label: template
+        - label: .github
+        - label: github-app-handler
+        - label: pull-request-generator
+        - label: self-approver
+        - label: auto-release-generator
+        - label: issue-supervisor
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      placeholder: Describe the work to be done...
+    validations:
+      required: true

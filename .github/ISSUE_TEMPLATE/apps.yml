@@ -1,0 +1,22 @@
+name: Apps
+description: Tasks to execute across all apps
+title: "[App Task]: "
+labels: ["app", "task"]
+body:
+  - type: checkboxes
+    id: apps
+    attributes:
+      label: Target Apps
+      description: Select the apps where this task should be applied.
+      options:
+        - label: pull-request-generator
+        - label: self-approver
+        - label: auto-release-generator
+        - label: issue-supervisor
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      placeholder: Describe the work to be done...
+    validations:
+      required: true

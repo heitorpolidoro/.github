@@ -10,6 +10,7 @@ repository:
   allow_rebase_merge: false
   delete_branch_on_merge: true
   allow_auto_merge: true
+  has_downloads: true
 
 branches:
   - name: master
@@ -26,7 +27,6 @@ branches:
           - "SonarCloud Code Analysis"
           - "DeepSource: Test coverage"
           - "DeepSource: Secrets"
-          # Add repo-specific checks here
       enforce_admins: false
       required_conversation_resolution: true
       restrictions:
