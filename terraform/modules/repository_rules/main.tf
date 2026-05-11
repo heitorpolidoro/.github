@@ -88,46 +88,10 @@ resource "github_repository_ruleset" "master" {
   }
 }
 
-# 2. Push Security Rules (Target: push - applies to ALL branches)
-resource "github_repository_ruleset" "push_security" {
-  name        = "push-security"
-  repository  = data.github_repository.repo.name
-  target      = "push"
-  enforcement = "active"
+# Note: Push Security Rules (Target: push) were removed because they are only supported 
+# for Org-owned repositories in GitHub Enterprise.
 
-  bypass_actors {
-    actor_id    = 5 # Repository Admin role
-    actor_type  = "RepositoryRole"
-    bypass_mode = "always"
-  }
-
-  rules {
-    file_path_restriction {
-      restricted_file_paths = [
-        "**/.env",
-        "**/.DS_Store",
-        "**/node_modules/**"
-      ]
-    }
-
-    file_extension_restriction {
-      # Complete list of restricted extensions
-      restricted_file_extensions = [
-        "*.exe", 
-        "*.dll", 
-        "*.key", 
-        "*.pem", 
-        "*.p12", 
-        "*.pfx", 
-        "*.sqlite", 
-        "*.db", 
-        "*.log"
-      ]
-    }
-  }
-}
-
-# 3. Tag Protection Rules (Target: tag - applies to v* tags)
+# 2. Tag Protection Rules (Target: tag - applies to v* tags)
 resource "github_repository_ruleset" "tags" {
   name        = "tag-protection"
   repository  = data.github_repository.repo.name
