@@ -49,12 +49,12 @@ resource "github_repository_ruleset" "master" {
     deletion                      = true
     non_fast_forward              = true
     required_linear_history       = true
-    required_signatures           = false # Strict Global Default
+    required_signatures           = false
 
     pull_request {
-      required_approving_review_count   = 1 # Strict Global Default
+      required_approving_review_count   = 1
       dismiss_stale_reviews_on_push     = true
-      require_code_owner_review         = true # Strict Global Default
+      require_code_owner_review         = true
       require_last_push_approval        = false
       required_review_thread_resolution = true
       allowed_merge_methods             = ["squash"]
@@ -78,7 +78,6 @@ resource "github_repository_ruleset" "master" {
       }
     }
     
-    # Corrected Block Name for CodeQL
     required_code_scanning {
       required_code_scanning_tool {
         tool                     = "CodeQL"
@@ -103,11 +102,6 @@ resource "github_repository_ruleset" "push_security" {
   }
 
   rules {
-    # File size is a nested block, not a direct argument
-    # We'll use file_path_restriction to cover most security needs
-    # max_file_size rule is currently buggy in some provider versions, 
-    # focusing on path restrictions for now as they are most critical.
-
     file_path_restriction {
       restricted_file_paths = [
         "**/.env",
@@ -123,7 +117,8 @@ resource "github_repository_ruleset" "push_security" {
     }
 
     file_extension_restriction {
-      restricted_file_extensions = [".exe", ".dll"]
+      # Fixed Pattern: Must start with *
+      restricted_file_extensions = ["*.exe", "*.dll"]
     }
   }
 }
@@ -148,12 +143,8 @@ resource "github_repository_ruleset" "tags" {
     bypass_mode = "always"
   }
 
-  bypass_actors {
-    actor_id    = 1 # Integrations (Apps/Workflows)
-    actor_type  = "Integration"
-    bypass_mode = "always"
-  }
-
+  # Integration bypass removed because it's not supported for personal account rulesets via API this way
+  
   rules {
     update   = true
     deletion = true
