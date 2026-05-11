@@ -10,5 +10,16 @@ locals {
     "meridian" = {
       extra_checks = ["test (24.x)"]
     }
+    "sigecon" = {
+      extra_checks = [
+        "Backend Tests",
+        "Frontend Tests",
+        "SonarCloud Scan",
+        "DeepSource: Python",
+        "DeepSource: JavaScript",
+        "DeepSource: Shell",
+        "DeepSource: Docker"
+      ]
+    }
   }
 }
