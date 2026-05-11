@@ -105,20 +105,24 @@ resource "github_repository_ruleset" "push_security" {
     file_path_restriction {
       restricted_file_paths = [
         "**/.env",
-        "**/*.key",
-        "**/*.pem",
-        "**/*.sqlite",
-        "**/*.db",
-        "**/*.log",
         "**/.DS_Store",
-        "**/*.p12",
         "**/node_modules/**"
       ]
     }
 
     file_extension_restriction {
-      # Fixed Pattern: Must start with *
-      restricted_file_extensions = ["*.exe", "*.dll"]
+      # Complete list of restricted extensions
+      restricted_file_extensions = [
+        "*.exe", 
+        "*.dll", 
+        "*.key", 
+        "*.pem", 
+        "*.p12", 
+        "*.pfx", 
+        "*.sqlite", 
+        "*.db", 
+        "*.log"
+      ]
     }
   }
 }
@@ -143,8 +147,6 @@ resource "github_repository_ruleset" "tags" {
     bypass_mode = "always"
   }
 
-  # Integration bypass removed because it's not supported for personal account rulesets via API this way
-  
   rules {
     update   = true
     deletion = true
