@@ -68,13 +68,22 @@ variable "enable_merge_queue" {
 variable "enable_code_quality" {
   description = "Whether to enforce code quality requirements"
   type        = bool
-  default     = true # Set to true by default since Sonar is global
+  default     = true
 }
 
 variable "enable_copilot_review" {
   description = "Whether to enable GitHub Copilot automatic code reviews"
   type        = bool
   default     = false
+}
+
+terraform {
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.0"
+    }
+  }
 }
 
 # Fetch existing repository data
