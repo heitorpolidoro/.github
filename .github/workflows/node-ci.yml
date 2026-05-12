@@ -43,13 +43,13 @@ jobs:
         env:
           CI: true
 
-      - name: DeepSource Coverage Report
-        if: inputs.enable-deepsource && matrix.node-version == inputs.sonar-node-version
-        run: |
-          curl -fsSL https://cli.deepsource.com/install | BINDIR=./bin sh
-          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/lcov.info
+      - name: SonarCloud Scan
+        if: matrix.node-version == inputs.sonar-node-version
+        uses: SonarSource/sonarqube-scan-action@v8
         env:
-          DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+_DSN }}
 
       - name: SonarCloud Scan
         if: matrix.node-version == inputs.sonar-node-version
