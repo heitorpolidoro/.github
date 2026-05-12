@@ -5,10 +5,10 @@ on:
     branches:
       - master
     paths:
-      - 'terraform/**' # Only trigger if files inside the terraform folder change
+      - 'terraform/**'
   pull_request:
     paths:
-      - 'terraform/**' # Only trigger if files inside the terraform folder change
+      - 'terraform/**'
 
 jobs:
   terraform:
