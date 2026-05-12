@@ -5,8 +5,11 @@ variable "repo_name" {
 
 variable "extra_status_checks" {
   description = "Additional status checks for specific repositories"
-  type        = list(string)
-  default     = []
+  type = list(object({
+    context        = string
+    integration_id = optional(number)
+  }))
+  default = []
 }
 
 terraform {
