@@ -4,6 +4,12 @@ locals {
   # Per user request, only 'extra_checks' can be customized.
   # All other security rules follow the strict global defaults.
   repos = {
+    ".github" = {
+      extra_checks = [
+        { context = "Terraform" },
+        { context = "DeepSource: Terraform", integration_id = 16372 }
+      ]
+    }
     "cash_lens" = {
       extra_checks = [
         { context = "build / Build and test", integration_id = 15368 },
