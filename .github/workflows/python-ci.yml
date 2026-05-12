@@ -1,0 +1,59 @@
+name: "Python CI"
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+        default: "3.13"
+      working-directory:
+        type: string
+        default: "."
+      sonar-project-key:
+        type: string
+        required: true
+      sonar-organization:
+        type: string
+        default: "heitorpolidoro"
+
+jobs:
+  test:
+    name: "Python Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v8
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ inputs.python-version }}
+        run: uv python install ${{ inputs.python-version }}
+
+      - name: Install dependencies
+        run: |
+          cd ${{ inputs.working-directory }}
+          uv sync --all-groups
+
+      - name: Run tests with coverage
+        run: |
+          cd ${{ inputs.working-directory }}
+          uv run pytest --cov=. --cov-report=xml:coverage.xml --junitxml=test-results.xml
+        env:
+          CI: true
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarqube-scan-action@v8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=${{ inputs.sonar-organization }}
+            -Dsonar.projectKey=${{ inputs.sonar-project-key }}
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.python.coverage.reportPaths=${{ inputs.working-directory }}/coverage.xml
