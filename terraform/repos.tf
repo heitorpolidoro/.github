@@ -7,7 +7,8 @@ locals {
     "cash_lens" = {
       extra_checks = [
         { context = "build / Build and test", integration_id = 15368 },
-        { context = "DeepSource: Code Formatters", integration_id = 16372 }
+        { context = "DeepSource: Code Formatters", integration_id = 16372 },
+        { context = "DeepSource: Docker", integration_id = 16372 }
       ]
     }
     "meridian" = {
