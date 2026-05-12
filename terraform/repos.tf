@@ -7,24 +7,24 @@ locals {
     "cash_lens" = {
       extra_checks = [
         { context = "build / Build and test", integration_id = 15368 },
-        { context = "DeepSource: Code Formatters" }
+        { context = "DeepSource: Code Formatters", integration_id = 16372 }
       ]
     }
     "meridian" = {
       extra_checks = [
         { context = "build / Test (Node 24.x)", integration_id = 15368 },
-        { context = "DeepSource: JavaScript" },
-        { context = "DeepSource: Code Formatters" }
+        { context = "DeepSource: JavaScript", integration_id = 16372 },
+        { context = "DeepSource: Code Formatters", integration_id = 16372 }
       ]
     }
     "sigecon" = {
       extra_checks = [
-        { context = "Backend Tests" },
+        { context = "Backend Tests" }, # Local CI doesn't have an App ID
         { context = "Frontend Tests" },
-        { context = "DeepSource: JavaScript" },
-        { context = "DeepSource: Python" },
-        { context = "DeepSource: Code Formatters" },
-        { context = "DeepSource: Docker" }
+        { context = "DeepSource: JavaScript", integration_id = 16372 },
+        { context = "DeepSource: Python", integration_id = 16372 },
+        { context = "DeepSource: Code Formatters", integration_id = 16372 },
+        { context = "DeepSource: Docker", integration_id = 16372 }
       ]
     }
   }
