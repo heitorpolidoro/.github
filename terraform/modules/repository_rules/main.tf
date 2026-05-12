@@ -71,9 +71,10 @@ resource "github_repository_ruleset" "master" {
 
       # Extra checks per repo
       dynamic "required_check" {
-        for_each = toset(var.extra_status_checks)
+        for_each = { for idx, check in var.extra_status_checks : idx => check }
         content {
-          context = required_check.value
+          context        = required_check.value.context
+          integration_id = required_check.value.integration_id
         }
       }
     }

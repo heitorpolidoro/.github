@@ -5,15 +5,19 @@ locals {
   # All other security rules follow the strict global defaults.
   repos = {
     "cash_lens" = {
-      extra_checks = ["build / Build and test"]
+      extra_checks = [
+        { context = "build / Build and test", integration_id = 15368 }
+      ]
     }
     "meridian" = {
-      extra_checks = ["build / Test (Node 24.x)"]
+      extra_checks = [
+        { context = "build / Test (Node 24.x)", integration_id = 15368 }
+      ]
     }
     "sigecon" = {
       extra_checks = [
-        "Backend Tests",
-        "Frontend Tests",
+        { context = "Backend Tests" },
+        { context = "Frontend Tests" }
       ]
     }
   }
