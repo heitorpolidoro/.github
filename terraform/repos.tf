@@ -24,6 +24,13 @@ locals {
         { context = "DeepSource: Code Formatters", integration_id = 16372 }
       ]
     }
+    "repertoire_hero" = {
+      extra_checks = [
+        { context = "build / Test (Node 20.x)", integration_id = 15368 },
+        { context = "DeepSource: JavaScript", integration_id = 16372 },
+        { context = "DeepSource: Code Formatters", integration_id = 16372 }
+      ]
+    }
     "sigecon" = {
       extra_checks = [
         { context = "Backend Tests" }, # Local CI doesn't have an App ID
