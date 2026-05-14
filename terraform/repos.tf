@@ -1,8 +1,13 @@
 locals {
+  # --- CHECK TEMPLATES ---
+  # Reusable check sets to avoid redundancy.
+  node_24_checks = [
+    { context = "build / Test (Node 24.x)", integration_id = 15368 },
+    { context = "DeepSource: JavaScript", integration_id = 16372 },
+    { context = "DeepSource: Code Formatters", integration_id = 16372 }
+  ]
+
   # --- REPOSITORY LIST ---
-  # Add new repositories here.
-  # Per user request, only 'extra_checks' can be customized.
-  # All other security rules follow the strict global defaults.
   repos = {
     ".github" = {
       extra_checks = [
@@ -18,22 +23,14 @@ locals {
       ]
     }
     "meridian" = {
-      extra_checks = [
-        { context = "build / Test (Node 24.x)", integration_id = 15368 },
-        { context = "DeepSource: JavaScript", integration_id = 16372 },
-        { context = "DeepSource: Code Formatters", integration_id = 16372 }
-      ]
+      extra_checks = local.node_24_checks
     }
     "repertoire_hero" = {
-      extra_checks = [
-        { context = "build / Test (Node 20.x)", integration_id = 15368 },
-        { context = "DeepSource: JavaScript", integration_id = 16372 },
-        { context = "DeepSource: Code Formatters", integration_id = 16372 }
-      ]
+      extra_checks = local.node_24_checks
     }
     "sigecon" = {
       extra_checks = [
-        { context = "Backend Tests" }, # Local CI doesn't have an App ID
+        { context = "Backend Tests" },
         { context = "Frontend Tests" },
         { context = "DeepSource: JavaScript", integration_id = 16372 },
         { context = "DeepSource: Python", integration_id = 16372 },
