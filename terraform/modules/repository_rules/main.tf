@@ -70,19 +70,15 @@ resource "github_repository_ruleset" "master" {
       # Global base checks
       required_check {
         context        = "GitGuardian Security Checks"
-        integration_id = 46505
       }
       required_check {
         context        = "SonarCloud"
-        integration_id = 12526
       }
       required_check {
         context        = "SonarCloud Code Analysis"
-        integration_id = 12526
       }
       required_check {
         context        = "DeepSource: Secrets"
-        integration_id = 16372
       }
 
       # Extra checks per repo
