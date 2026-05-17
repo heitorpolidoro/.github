@@ -25,7 +25,7 @@ locals {
     "meridian" = {
       extra_checks = local.node_24_checks
     }
-    "repertoire_hero" = {
+    "repertoire-hero" = {
       extra_checks = local.node_24_checks
     }
     "sigecon" = {
