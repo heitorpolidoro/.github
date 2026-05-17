@@ -26,8 +26,7 @@ locals {
       extra_checks = local.node_24_checks
     }
     "repertoire-hero" = {
-      extra_checks           = local.node_24_checks
-      strict_integration_ids = false  # GitGuardian/SonarCloud/DeepSource not yet configured for this repo
+      extra_checks = local.node_24_checks
     }
     "sigecon" = {
       extra_checks = [

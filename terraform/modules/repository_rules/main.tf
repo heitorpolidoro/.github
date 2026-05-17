@@ -12,12 +12,6 @@ variable "extra_status_checks" {
   default = []
 }
 
-variable "strict_integration_ids" {
-  description = "When false, base required checks are created without integration_id (needed for repos without GitGuardian/SonarCloud/DeepSource installed)"
-  type        = bool
-  default     = true
-}
-
 terraform {
   required_providers {
     github = {
@@ -76,19 +70,19 @@ resource "github_repository_ruleset" "master" {
       # Global base checks
       required_check {
         context        = "GitGuardian Security Checks"
-        integration_id = var.strict_integration_ids ? 46505 : null
+        integration_id = 46505
       }
       required_check {
         context        = "SonarCloud"
-        integration_id = var.strict_integration_ids ? 12526 : null
+        integration_id = 12526
       }
       required_check {
         context        = "SonarCloud Code Analysis"
-        integration_id = var.strict_integration_ids ? 12526 : null
+        integration_id = 12526
       }
       required_check {
         context        = "DeepSource: Secrets"
-        integration_id = var.strict_integration_ids ? 16372 : null
+        integration_id = 16372
       }
 
       # Extra checks per repo
@@ -96,7 +90,7 @@ resource "github_repository_ruleset" "master" {
         for_each = { for idx, check in var.extra_status_checks : idx => check }
         content {
           context        = required_check.value.context
-          integration_id = var.strict_integration_ids ? required_check.value.integration_id : null
+          integration_id = required_check.value.integration_id
         }
       }
     }
