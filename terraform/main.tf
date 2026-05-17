@@ -27,6 +27,7 @@ module "repository" {
   for_each = local.repos
   source   = "./modules/repository_rules"
 
-  repo_name           = each.key
-  extra_status_checks = lookup(each.value, "extra_checks", [])
+  repo_name              = each.key
+  extra_status_checks    = lookup(each.value, "extra_checks", [])
+  strict_integration_ids = lookup(each.value, "strict_integration_ids", true)
 }
