@@ -68,17 +68,22 @@ resource "github_repository_ruleset" "master" {
       do_not_enforce_on_create             = true
       
       # Global base checks
+      # Setting integration_id = 0 (Any Source) prevents 422 errors on repos without the App installed
       required_check {
         context        = "GitGuardian Security Checks"
+        integration_id = 0
       }
       required_check {
         context        = "SonarCloud"
+        integration_id = 0
       }
       required_check {
         context        = "SonarCloud Code Analysis"
+        integration_id = 0
       }
       required_check {
         context        = "DeepSource: Secrets"
+        integration_id = 0
       }
 
       # Extra checks per repo
@@ -86,7 +91,7 @@ resource "github_repository_ruleset" "master" {
         for_each = { for idx, check in var.extra_status_checks : idx => check }
         content {
           context        = required_check.value.context
-          integration_id = required_check.value.integration_id
+          integration_id = coalesce(required_check.value.integration_id, 0)
         }
       }
     }
