@@ -102,6 +102,11 @@ resource "github_repository_ruleset" "master" {
         security_alerts_threshold = "high_or_higher"
         alerts_threshold          = "errors"
       }
+      required_code_scanning_tool {
+        tool                     = "SonarCloud"
+        security_alerts_threshold = "high_or_higher"
+        alerts_threshold          = "errors"
+      }
     }
   }
 }
