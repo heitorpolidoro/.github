@@ -28,6 +28,9 @@ locals {
     "repertoire-hero" = {
       extra_checks = local.node_24_checks
     }
+    "bartholomew-smith" = {
+      extra_checks = local.node_24_checks
+    }
     "sigecon" = {
       extra_checks = [
         { context = "Backend Tests" },
