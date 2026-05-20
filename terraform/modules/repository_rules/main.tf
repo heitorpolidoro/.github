@@ -111,12 +111,6 @@ resource "github_repository_ruleset" "master" {
   }
 }
 
-resource "github_code_scanning_default_setup" "this" {
-  repository  = data.github_repository.repo.name
-  state       = "configured"
-  query_suite = "default"
-}
-
 # Note: Push Security Rules (Target: push) were removed because they are only supported
 # for Org-owned repositories in GitHub Enterprise.
 
