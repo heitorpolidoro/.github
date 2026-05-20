@@ -7,7 +7,7 @@ locals {
     { context = "DeepSource: Code Formatters" }
   ]
 
-  # --- REPOSITORY LIST ---
+  # --- REPOSITORY LIST --- (trigger enable-codeql)
   repos = {
     ".github" = {
       extra_checks = [
