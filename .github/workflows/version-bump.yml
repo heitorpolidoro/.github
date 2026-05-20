@@ -77,7 +77,7 @@ jobs:
         if: steps.guard.outputs.skip == 'false' && env.LABEL == inputs.skip_label
         run: echo "${{ inputs.skip_label }} — no version bump needed."
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         if: steps.guard.outputs.skip == 'false' && env.LABEL != inputs.skip_label
         with:
           node-version: "24.x"
