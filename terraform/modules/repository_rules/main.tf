@@ -111,7 +111,13 @@ resource "github_repository_ruleset" "master" {
   }
 }
 
-# Note: Push Security Rules (Target: push) were removed because they are only supported 
+resource "github_code_scanning_default_setup" "this" {
+  repository  = data.github_repository.repo.name
+  state       = "configured"
+  query_suite = "default"
+}
+
+# Note: Push Security Rules (Target: push) were removed because they are only supported
 # for Org-owned repositories in GitHub Enterprise.
 
 # 2. Tag Protection Rules (Target: tag - applies to v* tags)
