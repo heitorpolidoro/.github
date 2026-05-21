@@ -22,11 +22,11 @@ jobs:
             echo "Configuring $repo..."
 
             gh api -X PATCH /repos/heitorpolidoro/$repo \
-              -F allow_auto_merge=true \
+              -F allow_auto_merge=true > /dev/null \
               && echo "  ✅ auto-merge enabled" || echo "  ⚠️ auto-merge failed"
 
             gh api -X PATCH /repos/heitorpolidoro/$repo/code-scanning/default-setup \
               -f state=configured \
-              -f query_suite=default \
+              -f query_suite=default > /dev/null \
               && echo "  ✅ CodeQL enabled" || echo "  ⚠️ CodeQL failed"
           done
