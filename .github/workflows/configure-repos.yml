@@ -22,8 +22,9 @@ jobs:
             echo "Configuring $repo..."
 
             gh api -X PATCH /repos/heitorpolidoro/$repo \
-              -F allow_auto_merge=true > /dev/null \
-              && echo "  ✅ auto-merge enabled" || echo "  ⚠️ auto-merge failed"
+              -F allow_auto_merge=true \
+              -F delete_branch_on_merge=true > /dev/null \
+              && echo "  ✅ auto-merge + delete branch enabled" || echo "  ⚠️ repo settings failed"
 
             gh api -X PATCH /repos/heitorpolidoro/$repo/code-scanning/default-setup \
               -f state=configured \
