@@ -15,7 +15,7 @@ jobs:
 
       - name: Configure all repos
         env:
-          GH_TOKEN: ${{ secrets.ORG_TERRAFORM }}
+          GH_TOKEN: ${{ secrets.ORG_TERRAFORM_TOKEN }}
         run: |
           repos=$(grep -oP '"\K[^"]+(?=" = \{)' terraform/repos.tf)
           for repo in $repos; do
