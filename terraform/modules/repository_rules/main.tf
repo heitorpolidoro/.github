@@ -48,7 +48,7 @@ resource "github_repository_ruleset" "master" {
 
   rules {
     creation                      = true
-    update                        = true
+    update                        = false
     deletion                      = true
     non_fast_forward              = true
     required_linear_history       = true
