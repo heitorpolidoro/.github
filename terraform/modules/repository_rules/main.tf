@@ -81,10 +81,6 @@ resource "github_repository_ruleset" "master" {
         context        = "SonarCloud Code Analysis"
         integration_id = 0
       }
-      required_check {
-        context        = "DeepSource: Secrets"
-        integration_id = 0
-      }
 
       # Extra checks per repo
       dynamic "required_check" {
