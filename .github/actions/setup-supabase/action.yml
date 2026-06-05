@@ -1,6 +1,12 @@
 name: 'Setup Supabase'
 description: 'Install Supabase CLI, start a local instance, and export the well-known dev env vars'
 
+inputs:
+  exclude:
+    description: 'Comma-separated list of Supabase services to skip (e.g. studio,storage,realtime)'
+    required: false
+    default: 'analytics,edge-runtime,functions,imgproxy,inbucket,realtime,storage,studio,vector'
+
 runs:
   using: composite
   steps:
@@ -11,7 +17,7 @@ runs:
 
     - name: Start Supabase
       shell: bash
-      run: supabase start
+      run: supabase start --exclude ${{ inputs.exclude }}
 
     - name: Export local env vars
       shell: bash
