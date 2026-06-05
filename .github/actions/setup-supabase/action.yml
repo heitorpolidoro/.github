@@ -15,9 +15,38 @@ runs:
       with:
         version: 2.102.0
 
+    - name: Cache Supabase Docker images
+      uses: actions/cache@v4
+      with:
+        path: /tmp/supabase-docker-cache
+        key: supabase-docker-${{ runner.os }}-${{ hashFiles('supabase/config.toml') }}
+        restore-keys: supabase-docker-${{ runner.os }}-
+
+    - name: Load cached Docker images
+      shell: bash
+      run: |
+        shopt -s nullglob
+        for f in /tmp/supabase-docker-cache/*.tar; do
+          echo "Loading $f..."
+          docker load -i "$f"
+        done
+
     - name: Start Supabase
       shell: bash
       run: supabase start --exclude ${{ inputs.exclude }}
+
+    - name: Save Docker images to cache
+      shell: bash
+      run: |
+        mkdir -p /tmp/supabase-docker-cache
+        docker images --format "{{.Repository}}:{{.Tag}}" | grep -v "<none>" | while read img; do
+          safe=$(echo "$img" | tr '/:' '_')
+          out="/tmp/supabase-docker-cache/${safe}.tar"
+          if [ ! -f "$out" ]; then
+            echo "Saving $img..."
+            docker save "$img" -o "$out"
+          fi
+        done
 
     - name: Export local env vars
       shell: bash
